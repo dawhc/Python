@@ -1,0 +1,14 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\pages",
+    "\\sitebuilder",
+    "\\sitebuilder\\management",
+    "\\sitebuilder\\management\\commands",
+    "\\sitebuilder\\static",
+    "\\sitebuilder\\static\\css",
+    "\\sitebuilder\\templates"
+  ],
+  "SelectedNode": "\\sitebuilder\\templates\\page.html",
+  "PreviewInSolutionExplorer": false
+}
