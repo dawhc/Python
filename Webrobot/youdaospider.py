@@ -1,7 +1,7 @@
 import requests
 from bs4 import BeautifulSoup
 import json
-import os
+import os.path
 
 class YoudaoSpider(object):
     
@@ -30,7 +30,7 @@ class YoudaoSpider(object):
     def query(self, content):
         headers = {
             'Content-Type' : 'application/x-www-form-urlencoded;charset=UTF-8',
-            'Cookie' : '_ntes_nnid=22ee0241b90f5f7316c8ccb4cf2f48d0,1548677729506; OUTFOX_SEARCH_USER_ID_NCOO=1423995136.3098977; OUTFOX_SEARCH_USER_ID="418317374@10.169.0.83"; JSESSIONID=aaamgzo7M7TEv5YUGx8Nw; ___rl__test__cookies=1554719157481',
+            'Cookie' : 'OUTFOX_SEARCH_USER_ID=1523534611@112.239.244.14; OUTFOX_SEARCH_USER_ID_NCOO=171868438.72371995; UM_distinctid=16bfa3720fb54d-0a3499a0451374-e343166-e1000-16bfa3720fc465; JSESSIONID=aaakDvS6TL3_P6hyYc_Vw; SESSION_FROM_COOKIE=www.baidu.com; Hm_lvt_bfc6c23974fbad0bbfed25f88a973fb0=1563271003,1563271140,1563335272,1563335294; NTES_SESS=LdeLbyLR2ZmHztpP5TFbqjS8qijmkJLViROEChv5wn3r2wCz2RvHFKCcFsroJMCl3nU3RGPXbjZpMz.6qJ2tKPPwxuhoCIAN0a9zmKNaCVQuTeeWzQUs_9JQiwKDiLLPP.0_RqH9WV8n_9.7fluenynqNQkbLk8RcA.5F8378fmJWTKZvhhBNjtycOviHh80uZMo088qBAB1K; S_INFO=1563335328|0|3&20##|cui40098; P_INFO=cui40098@163.com|1563335328|0|youdao_zhiyun2018|11&5|gud&1560764520&mail163#shd&371500#10#0#0|&0||cui40098@163.com; Hm_lpvt_bfc6c23974fbad0bbfed25f88a973fb0=1563335487; ___rl__test__cookies=1563335501821',
             "Host" : "fanyi.youdao.com",
             "Origin" : "http://fanyi.youdao.com",
             "Referer" : "http://fanyi.youdao.com/",
@@ -49,7 +49,7 @@ class YoudaoSpider(object):
             'doctype' : 'json',
             'version' : '2.1',
             'keyfrom' : 'fanyi.web',
-            'action' : 'FY_BY_REALT',
+            'action' : 'FY_BY_REALTIME',
             'typoResult' : 'false'
             }
 
@@ -99,7 +99,7 @@ class YoudaoSpider(object):
 
     @staticmethod
     def get_sign(key, salt):
-        sign = "fanyideskweb" + key + str(salt) + "sr_3(QOHT)L2dx#uuGR@r"
+        sign = "fanyideskweb" + key + str(salt) + "97_3(jkMYg@T[KZQmqjTK"
         sign = YoudaoSpider.get_md5(sign)
         return sign
 
@@ -116,7 +116,7 @@ class YoudaoSpider(object):
 [YoudaoSpider Command Help]
 
 Use [content] to translate. (English <-> Chinese, using YoudaoDict)
-Use ".[command]" to setting:
+Use ".[command]" to control:
   .help       list commands
   .exit       exit the command
   .history    list query history
@@ -127,22 +127,23 @@ Use ".[command]" to setting:
     def command():
         print('Welcome to YoudaoSpider command!')
         command = YoudaoSpider()
-        print('input the content to translate.(input ".help" to view help list)')
+        print('Input the content to translate.(Input ".help" to view help list)')
         content = input('-> ')
         while (content != '.exit'):
-            if (content[0] == '.'):
-                if (content == '.help'): 
-                    print(YoudaoSpider.help())
-                elif (content == '.history'):
-                    command.show_history()
-                elif (content == '.clear'):
-                    command.clear_history()
-                elif (content == '.cls'):
-                    os.system('cls')
+            if content != '':
+                if content[0] == '.':
+                    if content == '.help': 
+                        print(YoudaoSpider.help())
+                    elif content == '.history':
+                        command.show_history()
+                    elif content == '.clear':
+                        command.clear_history()
+                    elif content == '.cls':
+                        os.system('cls')
+                    else:
+                        print('[Error] Unknown command "' + content + '".')
                 else:
-                    print('[Error] Unknown command "' + content + '".')
-            else:
-                command.query(content)
+                    command.query(content)
 
             content = input('-> ')
 
